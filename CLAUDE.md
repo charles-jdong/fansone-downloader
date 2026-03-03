@@ -31,22 +31,50 @@
 
 ## 2) 分支與 Commit 規範
 
+> 詳細規範請見 [`COMMIT_CONVENTION.md`](COMMIT_CONVENTION.md)。以下為摘要：
+
 - 主分支：`main`
 - 分支命名：`feature/`、`fix/`、`chore/`、`refactor/` + kebab-case 描述
 - Commit 格式：`<type>(<scope>): <subject>`（Conventional Commits）
+  - type: `feat` / `fix` / `docs` / `test` / `refactor` / `perf` / `chore` / `ci` / `build`
+  - scope: 模組或資料夾名（可省略）
+  - subject: 英文動詞開頭、50 字內、不加句號
+- 一次 commit 只做一件事
 - PR 合併策略：**Squash merge**
 
 ---
 
-## 3) 安全（特別重要）
+## 3) PR 描述規範（請嚴格遵守）
+
+> PR 模板位於 [`.github/pull_request_template.md`](.github/pull_request_template.md)，請依模板填寫。
+
+必須包含：
+1. **What**：做了什麼（3–6 點條列）
+2. **Why**：為什麼要做（背景/問題）
+3. **How to test**：怎麼測（指令 + 手動測項）
+4. **Risk & Rollback**：可能風險與回滾方式
+5. **Screenshots**（有 UI 變更才需要）
+
+---
+
+## 4) 安全（特別重要）
 - **禁止提交**：cookies、session tokens、帳號密碼、私人 URL
 - `.env` 中存放 FANSONE_EMAIL / FANSONE_PASSWORD，絕對不能 commit
+- `.cookies.json`（auth 快取）已加入 .gitignore
 - 下載的影片檔案（.mp4/.ts/.mkv）已加入 .gitignore
 
 ---
 
+## 5) 測試與品質
+- `python -m venv .venv && source .venv/bin/activate`
+- `pip install -r requirements.txt`
+- `pytest`（若有）
+- `ruff check .`（若有）
+
+---
+
 ## 7) 專案專屬資訊
-- 技術棧：Python 3.11+、yt-dlp、requests、browser-cookie3
+- 技術棧：Python 3.11+、yt-dlp、requests、browser-cookie3、rich
 - 安裝指令：`pip install -r requirements.txt`
 - Lint 指令：`ruff check .`
 - Test 指令：`pytest`
